@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { IRequest } from '../models';
+
+enum status {
+  new = 1,
+  inprocess = 2,
+  waiting = 3,
+  complete = 4,
+  cancelled = 5
+}
 
 @Component({
   selector: 'app-home',
@@ -6,24 +15,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  users = [];
+  requests: IRequest[];
 
   constructor() { }
 
   ngOnInit() {
-    this.users = [
-      { id: 19451, name: 'Bill', creation: '2017-11-23', color: 'Red' },
-      { id: 86205, name: 'Lottie', creation: '2016-12-26', color: 'Yellow' },
-      { id: 14096, name: 'Darla', creation: '2016-10-15', color: 'Purple' },
-      { id: 91080, name: 'Graham', creation: '2015-07-14', color: 'Black' },
-      { id: 91011, name: 'Brad', creation: '2016-11-26', color: 'Violet' },
-      { id: 83962, name: 'Keenan', creation: '2017-08-18', color: 'Orange' },
-      { id: 6166, name: 'Jeana', creation: '2017-01-22', color: 'Indigo' },
-      { id: 18717, name: 'Debby', creation: '2018-06-21', color: 'Magenta' },
-      { id: 55824, name: 'Roslyn', creation: '2016-07-01', color: 'Orange' },
-      { id: 24328, name: 'Sheridan', creation: '2016-07-25', color: 'Orange' },
-      { id: 39436, name: 'Genoveva', creation: '2015-11-05', color: 'Indigo' }
+    this.requests = [
+      {
+        req_date_local: new Date('6/28/2019 14:23'),
+        req_date_utc: new Date(new Date('6/28/2019 14:23').toUTCString()),
+        item_id: '61102418',
+        item_desc: 'MATERIAL TO REGRIND',
+        qty_req: 1,
+        ent_id: 1,
+        ent_name: 'Extrusion',
+        state_cd: 1,
+        state_desc: 'NEW',
+        remarks: null,
+        rework: false,
+        requested_by: 'bgauvey',
+        user_desc: 'Bill Gauvey',
+        uom_desc: 'BDL',
+        pack_size: 1,
+        yard_location: 'W B-23-25',
+        last_edit_comment: null,
+        last_edit_by: null,
+        last_edit_at: null,
+        row_id: 1
+      },
+      {
+        req_date_local: new Date('6/28/2019 14:23'),
+        req_date_utc: new Date(new Date('6/28/2019 14:23').toUTCString()),
+        item_id: '73010804',
+        item_desc: '6\'x8\' Dogwood Haven Series',
+        qty_req: 1,
+        ent_id: 1,
+        ent_name: 'High Volume',
+        state_cd: 2,
+        state_desc: 'IN PROCESS',
+        remarks: null,
+        rework: false,
+        requested_by: 'bgauvey',
+        user_desc: 'Bill Gauvey',
+        uom_desc: 'BDL',
+        pack_size: 1,
+        yard_location: 'W A-10',
+        last_edit_comment: null,
+        last_edit_by: null,
+        last_edit_at: null,
+        row_id: 2
+      }
     ];
+  }
+
+  fix(value: string): string {
+    return value.replace(' ', '_').toUpperCase();
   }
 
 }

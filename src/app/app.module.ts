@@ -10,6 +10,9 @@ import { RequestComponent } from './request/request.component';
 import { ReceiveComponent } from './receive/receive.component';
 import { YardSheetComponent } from './yard-sheet/yard-sheet.component';
 import { HomeComponent } from './home/home.component';
+import { PrintLayoutComponent } from './print-layout/print-layout.component';
+import { PickTicketComponent } from './pick-ticket/pick-ticket.component';
+import { BarcodeListenerComponent } from './barcode-listener/barcode-listener.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { HomeComponent } from './home/home.component';
     RequestComponent,
     ReceiveComponent,
     YardSheetComponent,
-    HomeComponent
+    HomeComponent,
+    PrintLayoutComponent,
+    PickTicketComponent,
+    BarcodeListenerComponent
   ],
   imports: [
     BrowserModule,
