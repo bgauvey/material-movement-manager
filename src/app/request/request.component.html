@@ -1,21 +1,65 @@
 <div class="clr-row">
-    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-        <div class="card">
-            <div class="card-header">
-                Material Request
-            </div>
-            <div class="card-block">
-                <div class="card-title">
-                    Block
-                </div>
-                <div class="card-text">
-                    ...
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-link">Submit</button>
-                <button class="btn btn-sm btn-link">Cancel</button>
-            </div>
-        </div>
+  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        Material Request
+      </div>
+      <div class="card-block">
+        <form clrForm [formGroup]="requestForm">
+          <!-- item_id field -->
+          <clr-input-container>
+            <label>Material</label>
+            <input formControlName="item_id" clrInput placeholder="Part number" required />
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+
+          <!--ent_id field-->
+          <clr-select-container>
+            <label>Department</label>
+            <select clrSelect formControlName="ent_id" required>
+              <option *ngFor="let opt of departments" [value]="opt.id">{{opt.name}}</option>
+            </select>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-select-container>
+
+          <!--qty_req field-->
+          <clr-input-container>
+            <label>Quantity</label>
+            <input clrInput formControlName="qty_req" type="number" required />
+            <clr-control-error *ngIf="!!requestForm.get('qty_req').errors?.required">This field is required!</clr-control-error>
+            <clr-control-error *ngIf="!!requestForm.get('qty_req').errors?.min">Quantity must be greater than 0</clr-control-error>
+          </clr-input-container>
+
+          <!--rework field-->
+          <clr-toggle-container>
+            <label>Rework</label>
+            <clr-toggle-wrapper>
+              <input type="checkbox" clrToggle formControlName="rework" />
+            </clr-toggle-wrapper>
+          </clr-toggle-container>
+
+          <!--remarks field-->
+          <clr-textarea-container>
+            <label>Remarks</label>
+            <textarea formControlName="remarks" clrTextarea></textarea>
+          </clr-textarea-container>
+
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-sm btn-link" [disabled]="!requestForm.valid" (click)="onSubmit()">Submit</button>
+        <button class="btn btn-sm btn-link" (click)="onCancel()">Cancel</button>
+      </div>
     </div>
+  </div>
 </div>
+<clr-modal [(clrModalOpen)]="prompt">
+  <h3 class="modal-title">Leave</h3>
+  <div class="modal-body">
+      <p>Do you want to leave without submitting?</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="prompt = false">No</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/home']">Yes</button>
+  </div>
+</clr-modal>
