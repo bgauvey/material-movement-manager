@@ -1,0 +1,66 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="p-grid p-justify-between">
+  <div class="p-col-12 p-md-6 p-lg-3">
+    <p-card routerLink="/request" header="Request Materials" styleClass="top-card">
+      Submit a request for materials.
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-6 p-lg-3">
+    <p-card routerLink="/receive" header="Receive Materials" styleClass="top-card">
+      Submit a reciept of materials.
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-6 p-lg-3">
+      <p-card routerLink="/yard" header="Yard Sheet" styleClass="top-card">
+        Manage material locations on yard.
+      </p-card>
+    </div>
+  <div class="p-col-12 p-md-6 p-lg-3">
+    <p-card header="Reports" styleClass="top-card">
+      <div class="summary">View reports for material movements.</div>
+    </p-card>
+  </div>
+  <div class="p-col-12">
+    <p-card [style]="{width: '100%'}">
+        <p-table #tbl [value]="requests" [paginator]="true" [rows]="15" [responsive]="true" [(contextMenuSelection)]="selectedRow" [contextMenu]="cm">
+            <ng-template pTemplate="caption">
+              <div style="column-count: 3">
+                <div style="text-align: right">&nbsp;</div>
+                <div style="text-align: center; font-size: 1.5em">
+                  Recent Requests
+                </div>
+                <div style="text-align: right">
+                  <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                  <input type="text" pInputText size="50" placeholder="Global Filter" (input)="tbl.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+              </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Date Requested</th>
+              <th>Material</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Department</th>
+              <th>Yard Location</th>
+              <th>Status</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-request>
+            <tr [pContextMenuRow]="request">
+              <td>{{request.req_date_local | date: 'MM/dd/yyyy h:mm:ss a'}}</td>
+              <td>{{request.item_id}}</td>
+              <td>{{request.item_desc}}</td>
+              <td>{{request.qty_req}}</td>
+              <td>{{request.ent_name}}</td>
+              <td>{{request.yard_location}}</td>
+              <td [className]="fix(request.state_desc)">{{request.state_desc}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+    </p-card>
+  </div>
+</div>
+
+<p-contextMenu #cm [model]="items"></p-contextMenu>

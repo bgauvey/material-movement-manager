@@ -1,0 +1,59 @@
+<div class="request">
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+  <p-card header="Material Request Form">
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+      <div class="p-grid">
+        <div class="p-col-12">
+          <!-- Material input field -->
+          <h3 class="first">Material</h3>
+          <input id="input" type="text" size="30" pInputText formControlName="item_id" required>
+          <p-message severity="error" text="Material is required"
+            *ngIf="!requestForm.controls['item_id'].valid&&requestForm.controls['item_id'].dirty"></p-message>
+        </div>
+        <div class="p-col-6">
+          <!-- Entity input field -->
+          <h3 class="first">Department</h3>
+          <p-dropdown [options]="departments" formControlName="department" optionLabel="name" required></p-dropdown>
+          <p-message severity="error" text="Department is required"
+            *ngIf="!requestForm.controls['department'].valid&&requestForm.controls['department'].dirty"></p-message>
+        </div>
+        <div class="p-col-6">
+          <!-- Requested By field -->
+          <h3 class="first">Requested By</h3>
+          <span>{{requestedBy}} - {{userDesc}}</span>
+        </div>
+        <div class="p-col-6">
+          <!-- Quantity input field -->
+          <h3 class="first">Quantity</h3>
+          <p-spinner size="30" [min]="0" [max]="100" formControlName="req_qty" required></p-spinner>
+          <p-message severity="error" text="A value greater that 0 is required"
+            *ngIf="!requestForm.controls['req_qty'].valid&&requestForm.controls['req_qty'].dirty"></p-message>
+        </div>
+        <div class="p-col-6">
+          <!-- Requested Date input field -->
+          <h3 class="first">Date Requested</h3>
+          <p-calendar [touchUI]="true" formControlName="req_date" required></p-calendar>
+          <p-message severity="error" text="Date Requested is required"
+            *ngIf="!requestForm.controls['req_date'].valid&&requestForm.controls['req_date'].dirty"></p-message>
+        </div>
+        <div class="p-col-6">
+          <!-- rework input field -->
+          <h3 class="first">Rework</h3>
+          <p-inputSwitch formControlName="rework"></p-inputSwitch>
+        </div>
+        <div class="p-col-12">
+          <!-- Remarks input field -->
+          <h3 class="first">Remarks</h3>
+          <textarea rows="5" cols="60" pInputTextarea autoResize="autoResize" formControlName="remarks"></textarea>
+        </div>
+        <div class="p-col-12">
+          <button pButton type="button" label="Submit" icon="pi pi-check" class="ui-button-success"
+            style="margin-right: .25em" type="submit" [disabled]="!requestForm.valid"></button>
+          <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"
+            (click)="onCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>

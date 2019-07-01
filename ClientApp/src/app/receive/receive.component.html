@@ -1,0 +1,85 @@
+<div class="receive">
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <p-messages></p-messages>
+  <app-barcode-listener (Error)="onError($event)" (ScanComplete)="onScanComplete($event)" #barcodeListener>
+  </app-barcode-listener>
+  <p-card header="Material Reciept Form">
+    <p-panel header="Scan Ticket" *ngIf="state===0">
+      <div class="instructions">Scan the pick ticket.</div>
+    </p-panel>
+    <p-panel header="Scan Ticket" *ngIf="state===1">
+        <div class="instructions">Scan a unit ticket for <strong>{{pullTicket.item_id}}</strong></div>
+      </p-panel>
+    <form [formGroup]="receiveForm" (ngSubmit)="onSubmit()" *ngIf="state===2">
+      <div class="p-grid">
+        <div class="p-col-6">
+          <!-- Serial Number field -->
+          <h3 class="first">Serial Number</h3>
+          <input id="input" type="text" size="10" pInputText formControlName="sublot_no" [attr.disabled]="true">
+        </div>
+        <div class="p-col-6">
+          <!-- Quantity field -->
+          <h3 class="first">Quantity</h3>
+          <input id="input" type="text" size="10" pInputText formControlName="req_qty" [attr.disabled]="true">
+        </div>
+        <div class="p-col-12">
+          <!-- Material field -->
+          <h3 class="first">Material</h3>
+          <input id="input" type="text" size="30" pInputText formControlName="item_id" [attr.disabled]="true">
+        </div>
+        <div class="p-col-12">
+          <span>{{itemDesc}}</span>
+        </div>
+        <div class="p-col-6">
+          <!-- RequestedBy field -->
+          <h3 class="first">Requested By</h3>
+          <span>{{userDesc}}</span>
+        </div>
+        <div class="p-col-12">
+          <p-panel header="Transfer Data">
+            <div class="instructions">This section contains data required to submit the ticket to SAP. Please ensure all
+              fields are correct.</div>
+            <div class="p-grid">
+              <div class="p-col-6">
+                <!-- Quantity field -->
+                <h3 class="first">Reason</h3>
+                <p-dropdown [options]="reasons" formControlName="reason"></p-dropdown>
+                <p-message *ngIf="!!f.reason.errors?.required" severity="error" text="Reason is required"></p-message>
+              </div>
+              <div class="p-col-6">
+                <!-- Quantity field -->
+                <h3 class="first">Units</h3>
+                <p-dropdown [options]="units" formControlName="uom_id"></p-dropdown>
+                <p-message *ngIf="!!f.uom_id.errors?.required" severity="error" text="Units is required"></p-message>
+              </div>
+              <div class="p-col-6">
+                <!-- Quantity field -->
+                <h3 class="first">Source</h3>
+                <p-dropdown [options]="sources" formControlName="source"></p-dropdown>
+                <p-message *ngIf="!!f.source.errors?.required" severity="error" text="Source is required"></p-message>
+              </div>
+              <div class="p-col-6">
+                <!-- Quantity field -->
+                <h3 class="first">Destination</h3>
+                <p-dropdown [options]="destinations" formControlName="dest"></p-dropdown>
+                <p-message *ngIf="!!f.dest.errors?.required" severity="error" text="Destination is required"></p-message>
+              </div>
+            </div>
+            <div class="p-col-12">
+                <p-message *ngIf="!!f.dest.errors?.rework" severity="error" text="Rework must go to Shop Floor (1020)"></p-message>
+                <p-message *ngIf="!!f.dest.errors?.cutback" severity="error" text="Cutback must go to Profab Floor (1036)">
+                </p-message>
+            </div>
+          </p-panel>
+        </div>
+
+        <div class="p-col-12">
+          <button pButton type="button" label="Submit" icon="pi pi-check" class="ui-button-success"
+            style="margin-right: .25em" type="submit" [disabled]="!receiveForm.valid"></button>
+          <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary"
+            (click)="onCancel()"></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>
