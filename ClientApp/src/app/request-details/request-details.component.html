@@ -1,0 +1,75 @@
+<div class="request">
+  <p-card header="Material Request Details">
+    <!-- Entity input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Status</h3>
+      </div>
+      <div class="p-col">{{statusDesc}}</div>
+    </div>
+
+    <!-- Material input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Material</h3>
+      </div>
+      <div class="p-col">
+        <div>{{itemId}}<br />{{itemDesc}}</div>
+      </div>
+    </div>
+
+    <!-- Entity input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Department</h3>
+      </div>
+      <div class="p-col">{{department}}</div>
+    </div>
+
+    <!-- Quantity input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Quantity</h3>
+      </div>
+      <div class="p-col">{{reqQty}}</div>
+    </div>
+
+    <!-- Requested Date input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Date Requested</h3>
+      </div>
+      <div class="p-col">{{dateReq | date: 'MM/dd/yyyy h:mm:ss a'}}</div>
+    </div>
+
+    <!-- rework input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Rework</h3>
+      </div>
+      <div class="p-col">{{rework ? 'Yes' : 'No'}}</div>
+    </div>
+
+    <!-- Remarks input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Remarks</h3>
+      </div>
+      <div class="p-col">{{remarks}}</div>
+    </div>
+
+    <!-- RequestedBy input field -->
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:200px">
+        <h3 class="first">Requested By</h3>
+      </div>
+      <div class="p-col">{{requestedBy}} - {{userDesc}}</div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <button pButton type="button" label="Back to Listing" [routerLink]="['/']" class="ui-button-success"></button>
+      </div>
+    </div>
+  </p-card>
+</div>

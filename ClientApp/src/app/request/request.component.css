@@ -1,0 +1,24 @@
+.request {
+  padding-top: 8px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.ui-card-header img {
+  width: 100%
+}
+
+.ui-widget, .ui-widget * {
+  box-sizing: border-box;
+}
+
+h3.first {
+  margin-top: 0 !important;
+  margin-bottom: 2px;
+}
+h3 {
+  margin-top: 30px;
+  color: #272727;
+  font-weight: 700;
+  font-size: 16px;
+}

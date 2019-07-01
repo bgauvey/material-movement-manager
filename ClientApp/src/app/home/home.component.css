@@ -1,0 +1,42 @@
+.top-card {
+  cursor: pointer;
+  background-image: linear-gradient(rgb(43, 192, 236), rgb(27, 129, 215)) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+
+.top-card:hover {
+  cursor: pointer;
+  background-image: linear-gradient(rgb(84, 214, 253), rgb(49, 138, 211)) !important;
+  color: #ffffff !important;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+
+.NEW {
+  background-image: linear-gradient(to right, #00d4ff, #00ffff) !important;
+  /*background-color:aqua !important; */
+}
+
+.IN_PROGRESS {
+  background-image: linear-gradient(to right, #F7971E, #FFD200) !important;
+  /*background-color:orange !important; */
+  color: white !important
+}
+
+.AWAITING {
+  background-image: linear-gradient(to right,#579137, #99ff61) !important;
+  /*background-color:limegreen !important;*/
+  color: white !important
+}
+
+.COMPLETE {
+  background-image: linear-gradient(to right,rgb(0, 0, 150), rgb(81, 81, 255)) !important;
+  color: white !important
+}
+
+
+.CANCELLED {
+  background-image: linear-gradient(to right,rgb(255, 0, 0), rgb(253, 97, 97)) !important;
+  background-color:red !important;
+  color: white !important
+}
