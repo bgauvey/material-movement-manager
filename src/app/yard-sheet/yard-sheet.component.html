@@ -1,1 +1,23 @@
-<p>yard-sheet works!</p>
+<clr-datagrid [(clrDgSelected)]="selected">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()">
+        <clr-icon shape="plus"></clr-icon> Add
+      </button>
+      <button type="button" class="btn btn-sm btn-secondary" (click)="onDelete()">
+        <clr-icon shape="close"></clr-icon> Delete
+      </button>
+      <button type="button" class="btn btn-sm btn-secondary" (click)="onEdit()" *ngIf="selected.length == 1">
+        <clr-icon shape="pencil"></clr-icon> Edit
+      </button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column>Material</clr-dg-column>
+  <clr-dg-column>Location</clr-dg-column>
+  <clr-dg-column>Comments</clr-dg-column>
+  <clr-dg-row *clrDgItems="let loc of yardlocations" [clrDgItem]="loc">
+    <clr-dg-cell>{{loc.item_id}}</clr-dg-cell>
+    <clr-dg-cell>{{loc.location_text}}</clr-dg-cell>
+    <clr-dg-cell>{{loc.last_edit_comment}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
