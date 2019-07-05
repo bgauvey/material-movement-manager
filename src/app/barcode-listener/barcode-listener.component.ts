@@ -106,7 +106,7 @@ export class BarcodeListenerComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (event.keyCode === KEY_CODE.ENTER_KEY) {
+    if (event.key === 'Enter') {
       if (this.rawData.length > 3) {
         this.parseData(this.rawData);
         this.rawData = '';
